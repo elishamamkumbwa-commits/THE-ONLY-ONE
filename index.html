@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#071A2F">
+    <meta name="description"
+        content="THE ONLY ONE COMPANY - Premium technology solutions for AI, Robotics, Networking, Security, and Digital Creativity.">
+
+    <title>THE ONLY ONE COMPANY</title>
+
+    <style>
+        :root {
+            --navy: #071A2F;
+            --navy2: #0B2742;
+            --navy3: #0E3556;
+            --blue: #0A84D8;
+            --cyan: #43C7FF;
+            --white: #F7FBFF;
+            --muted: #AFC4D8;
+            --line: rgba(132, 202, 239, .18);
+            --card: rgba(10, 35, 59, .78);
+            --shadow: 0 24px 70px rgba(0, 0, 0, .30);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            color: var(--white);
+            background:
+                radial-gradient(circle at 12% 12%, rgba(67, 199, 255, .12), transparent 28%),
+                radial-gradient(circle at 88% 25%, rgba(10, 132, 216, .12), transparent 30%),
+                linear-gradient(135deg, #061321, #071A2F 48%, #061727);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* BACKGROUND */
+        .bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg:before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: rgba(67, 199, 255, .07);
+            filter: blur(80px);
+            top: -170px;
+            left: -120px;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .bg:after {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: rgba(10, 132, 216, .08);
+            filter: blur(90px);
+            right: -180px;
+            bottom: -180px;
+            animation: float 14s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            50% {
+                transform: translate(35px, 30px) scale(1.08);
+            }
+        }
+
+        /* LOGO FRAME */
+        .logoFrame {
+            position: relative;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .logoFrame::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #0A84D8, #43C7FF, #00E0FF, #43C7FF, #0A84D8);
+            animation: spinGlow 6s linear infinite;
+            z-index: 0;
+            opacity: .85;
+            filter: blur(1px);
+        }
+
+        .logoFrame::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            border-radius: 50%;
+            background: #071A2F;
+            z-index: 1;
+        }
+
+        .logoFrame img {
+            position: relative;
+            z-index: 2;
+            border-radius: 50%;
+            background: #071A2F;
+            border: 2px solid rgba(67, 199, 255, .5);
+            box-shadow: 0 0 12px rgba(67, 199, 255, .5), inset 0 0 12px rgba(10, 132, 216, .4);
+        }
+
+        .logoFrame:hover::before {
+            animation-duration: 2s;
+            filter: blur(2px) brightness(1.3);
+        }
+
+        @keyframes spinGlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loaderLogoFrame {
+            width: 240px;
+            height: 240px;
+        }
+
+        .loaderLogoFrame img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            animation: logoPulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 12px rgba(67, 199, 255, .5), inset 0 0 12px rgba(10, 132, 216, .4);
+            }
+
+            50% {
+                box-shadow: 0 0 28px rgba(67, 199, 255, .9), inset 0 0 18px rgba(10, 132, 216, .6);
+            }
+        }
+
+        .navLogoFrame {
+            width: 52px;
+            height: 52px;
+            margin-left: 4px;
+        }
+
+        .navLogoFrame img {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+        }
+
+        .navLogoFrame::before {
+            inset: -3px;
+            filter: blur(0.5px);
+            opacity: .9;
+        }
+
+        .navLogoFrame::after {
+            inset: 1.5px;
+        }
+
+        /* LOADER */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #061321;
+            display: grid;
+            place-items: center;
+            z-index: 9999;
+            transition: .7s;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loaderBox {
+            text-align: center;
+        }
+
+        .loaderLine {
+            width: 160px;
+            height: 3px;
+            background: #12344f;
+            margin: 25px auto 0;
+            overflow: hidden;
+            border-radius: 99px;
+        }
+
+        .loaderLine:after {
+            content: "";
+            display: block;
+            height: 100%;
+            width: 45%;
+            background: linear-gradient(90deg, var(--blue), var(--cyan));
+            animation: load 1.2s infinite;
+        }
+
+        @keyframes load {
+            to {
+                transform: translateX(250%);
+            }
+        }
+
+        /* APPLICATION */
+        #app {
+            display: block;
+        }
+
+        /* NAVIGATION */
+        .nav {
+            position: fixed;
+            z-index: 1000;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1200px, 94%);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 14px 6px 12px;
+            background: rgba(5, 19, 34, .84);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, .25);
+        }
+
+        .navLinks {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .navLinks button {
+            border: 0;
+            background: transparent;
+            color: #BBD0E2;
+            padding: 10px 12px;
+            border-radius: 11px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .navLinks button:hover,
+        .navLinks button.active {
+            color: #fff;
+            background: rgba(67, 199, 255, .10);
+        }
+
+        .menu {
+            display: none;
+            border: 1px solid var(--line);
+            background: #0B2742;
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+        }
+
+        /* MAIN */
+        main {
+            padding-top: 105px;
+        }
+
+        .view {
+            display: none;
+            min-height: calc(100vh - 105px);
+            padding: 60px 0 90px;
+        }
+
+        .view.active {
+            display: block;
+            animation: enter .55s ease;
+        }
+
+        @keyframes enter {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .container {
+            width: min(1160px, 92%);
+            margin: auto;
+        }
+
+        .kicker {
+            color: var(--cyan);
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: .2em;
+        }
+
+        .title {
+            font-size: clamp(38px, 6vw, 72px);
+            line-height: 1;
+            margin: 12px 0 20px;
+            letter-spacing: -2px;
+        }
+
+        .lead {
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 760px;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 72vh;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(52px, 8vw, 96px);
+            line-height: .9;
+            letter-spacing: -5px;
+        }
+
+        .hero h1 span {
+            color: var(--cyan);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            padding: 13px 19px;
+            color: #fff;
+            background: #0B2742;
+            font-weight: 850;
+        }
+
+        .btnBlue {
+            background: linear-gradient(135deg, #0A84D8, #43C7FF);
+            border: 0;
+        }
+
+        /* ORBIT SYSTEM */
+        .heroVisual {
+            position: relative;
+            min-height: 540px;
+            display: grid;
+            place-items: center;
+            perspective: 1200px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 34px;
+            background: linear-gradient(145deg, rgba(14, 53, 86, .55), rgba(5, 20, 35, .55));
+            box-shadow: var(--shadow);
+        }
+
+        .heroLogoBg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 88%;
+            max-width: 460px;
+            height: auto;
+            border-radius: 50%;
+            opacity: 0.14;
+            filter: blur(1.5px) saturate(1.2);
+            z-index: 0;
+            pointer-events: none;
+            animation: logoBgBreath 8s ease-in-out infinite;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .heroLogoGlow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            max-width: 320px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(67, 199, 255, .22), rgba(10, 132, 216, .10) 45%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: logoGlowPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes logoBgBreath {
+
+            0%,
+            100% {
+                opacity: 0.10;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 0.20;
+                transform: translate(-50%, -50%) scale(1.05) rotate(3deg);
+            }
+        }
+
+        @keyframes logoGlowPulse {
+
+            0%,
+            100% {
+                opacity: .55;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: .9;
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        .orbitSystem {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 540px;
+            display: grid;
+            place-items: center;
+            z-index: 2;
+        }
+
+        .orbitCore {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #43C7FF, #0A84D8 45%, #071A2F 95%);
+            box-shadow: 0 0 40px rgba(67, 199, 255, .55), 0 0 80px rgba(10, 132, 216, .35), inset 0 0 30px rgba(0, 0, 0, .6);
+            display: grid;
+            place-items: center;
+            z-index: 5;
+            animation: corePulse 3.5s ease-in-out infinite;
+        }
+
+        .orbitCore span {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .18em;
+            color: #fff;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        @keyframes corePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(67, 199, 255, .55), 0 0 80px rgba(10, 132, 216, .35), inset 0 0 30px rgba(0, 0, 0, .6);
+            }
+
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 60px rgba(67, 199, 255, .85), 0 0 120px rgba(10, 132, 216, .55), inset 0 0 30px rgba(0, 0, 0, .6);
+            }
+        }
+
+        .orbitRing {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(67, 199, 255, .18);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .orbitRing.ring1 {
+            width: 340px;
+            height: 340px;
+            animation: spinRing 30s linear infinite;
+        }
+
+        .orbitRing.ring2 {
+            width: 480px;
+            height: 480px;
+            border-style: solid;
+            border-color: rgba(67, 199, 255, .08);
+            animation: spinRing 50s linear infinite reverse;
+        }
+
+        .orbitRing.ring1::before,
+        .orbitRing.ring2::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan);
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes spinRing {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .orbitTrack {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            animation: spinTrack 24s linear infinite;
+            transform-style: preserve-3d;
+            z-index: 3;
+        }
+
+        @keyframes spinTrack {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .orbitItem {
+            position: absolute;
+            width: 0;
+            height: 0;
+            animation: counterSpin 24s linear infinite;
+        }
+
+        @keyframes counterSpin {
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .orbitItem:nth-child(1) {
+            transform: rotate(0deg) translateX(170px);
+        }
+
+        .orbitItem:nth-child(2) {
+            transform: rotate(72deg) translateX(170px);
+        }
+
+        .orbitItem:nth-child(3) {
+            transform: rotate(144deg) translateX(170px);
+        }
+
+        .orbitItem:nth-child(4) {
+            transform: rotate(216deg) translateX(170px);
+        }
+
+        .orbitItem:nth-child(5) {
+            transform: rotate(288deg) translateX(170px);
+        }
+
+        .orbitItem:nth-child(1) .floatCard {
+            animation-delay: 0s;
+        }
+
+        .orbitItem:nth-child(2) .floatCard {
+            animation-delay: .4s;
+        }
+
+        .orbitItem:nth-child(3) .floatCard {
+            animation-delay: .8s;
+        }
+
+        .orbitItem:nth-child(4) .floatCard {
+            animation-delay: 1.2s;
+        }
+
+        .orbitItem:nth-child(5) .floatCard {
+            animation-delay: 1.6s;
+        }
+
+        .floatCard {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            padding: 14px 16px;
+            background: linear-gradient(145deg, rgba(12, 40, 65, .95), rgba(7, 26, 47, .95));
+            border: 1px solid rgba(67, 199, 255, .35);
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .5), 0 0 0 1px rgba(67, 199, 255, .1), inset 0 1px 0 rgba(255, 255, 255, .1);
+            backdrop-filter: blur(10px);
+            animation: cardFloat 4s ease-in-out infinite;
+            transition: border-color .3s, box-shadow .3s;
+            cursor: default;
+        }
+
+        .floatCard:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, .6), 0 0 25px rgba(67, 199, 255, .5), inset 0 1px 0 rgba(255, 255, 255, .2);
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -10px;
+            }
+        }
+
+        .floatCard .fcIcon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #0A84D8, #43C7FF);
+            display: grid;
+            place-items: center;
+            font-size: 11px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+            box-shadow: 0 6px 16px rgba(10, 132, 216, .4);
+        }
+
+        .floatCard strong {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .04em;
+            color: #fff;
+            line-height: 1.35;
+            margin-bottom: 3px;
+        }
+
+        .floatCard small {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 1.3;
+        }
+
+        /* CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(12, 40, 65, .88), rgba(7, 26, 47, .88));
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, .15);
+            transition: .35s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(67, 199, 255, .35);
+        }
+
+        .cardIcon {
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #0A84D8, #43C7FF);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-weight: 950;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 14px;
+        }
+
+        .serviceCard {
+            cursor: pointer;
+        }
+
+        .serviceCard .more {
+            display: inline-block;
+            color: var(--cyan);
+            margin-top: 15px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        /* SERVICE DETAIL */
+        .detail {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .detailImage {
+            height: 430px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+
+        .detailImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detailText h2 {
+            font-size: 50px;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .detailText p {
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .bullets {
+            margin-top: 22px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .bullets div {
+            color: #D8EAF7;
+        }
+
+        .bullets div:before {
+            content: "✓";
+            color: var(--cyan);
+            margin-right: 10px;
+        }
+
+        .back {
+            border: 0;
+            background: transparent;
+            color: var(--cyan);
+            font-weight: 900;
+            margin-bottom: 25px;
+            padding: 0;
+        }
+
+        /* FOUNDER */
+        .founder {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .founderPhoto {
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            background: #0B2742;
+        }
+
+        .founderPhoto img {
+            width: 100%;
+            height: 620px;
+            object-fit: cover;
+        }
+
+        .founderText h2 {
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: .95;
+            margin: 10px 0 15px;
+        }
+
+        .founderText h3 {
+            color: var(--cyan);
+            margin-bottom: 20px;
+        }
+
+        .founderText p {
+            color: var(--muted);
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+        /* ABOUT / PROJECTS */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .bigCard {
+            padding: 32px;
+        }
+
+        .bigCard p {
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .projectImage {
+            height: 220px;
+            border-radius: 17px;
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+
+        .projectImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CONTACT */
+        .contact {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .info,
+        .form {
+            background: linear-gradient(145deg, rgba(12, 40, 65, .88), rgba(7, 26, 47, .88));
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 30px;
+        }
+
+        .infoRow {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .infoRow strong {
+            display: block;
+        }
+
+        .infoRow span {
+            color: var(--muted);
+        }
+
+        .form textarea {
+            min-height: 170px;
+            resize: vertical;
+        }
+
+        .form .primary {
+            margin-top: 5px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            border: 1px solid #D6E7F1;
+            background: #fff;
+            color: #0B2742;
+            padding: 14px;
+            border-radius: 13px;
+            outline: none;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: #159FE6;
+            box-shadow: 0 0 0 4px rgba(21, 159, 230, .10);
+        }
+
+        .primary {
+            width: 100%;
+            border: 0;
+            border-radius: 13px;
+            padding: 15px;
+            background: linear-gradient(135deg, #0A84D8, #43C7FF);
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 0 14px 30px rgba(10, 132, 216, .25);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 30px 0;
+            color: #8FA8BC;
+        }
+
+        .footerIn {
+            width: min(1160px, 92%);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* TABLET */
+        @media(max-width:1050px) {
+            .navLinks {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: #071A2F;
+                border: 1px solid var(--line);
+                border-radius: 17px;
+                padding: 10px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .navLinks.show {
+                display: flex;
+            }
+
+            .navLinks button {
+                text-align: left;
+                padding: 13px;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .hero,
+            .detail,
+            .founder,
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .founderPhoto img {
+                height: 520px;
+            }
+
+            .orbitSystem,
+            .heroVisual {
+                min-height: 460px;
+            }
+
+            .orbitCore {
+                width: 110px;
+                height: 110px;
+            }
+
+            .orbitRing.ring1 {
+                width: 290px;
+                height: 290px;
+            }
+
+            .orbitRing.ring2 {
+                width: 400px;
+                height: 400px;
+            }
+
+            .orbitItem:nth-child(1) {
+                transform: rotate(0deg) translateX(145px);
+            }
+
+            .orbitItem:nth-child(2) {
+                transform: rotate(72deg) translateX(145px);
+            }
+
+            .orbitItem:nth-child(3) {
+                transform: rotate(144deg) translateX(145px);
+            }
+
+            .orbitItem:nth-child(4) {
+                transform: rotate(216deg) translateX(145px);
+            }
+
+            .orbitItem:nth-child(5) {
+                transform: rotate(288deg) translateX(145px);
+            }
+
+            .heroLogoBg {
+                max-width: 380px;
+            }
+        }
+
+        /* MOBILE */
+        @media(max-width:700px) {
+            .hero {
+                min-height: auto;
+                padding-top: 35px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .grid,
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+            .detailText h2 {
+                font-size: 40px;
+            }
+
+            .nav {
+                height: 64px;
+            }
+
+            .navLogoFrame {
+                width: 46px;
+                height: 46px;
+            }
+
+            .navLogoFrame img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .loaderLogoFrame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .loaderLogoFrame img {
+                width: 184px;
+                height: 184px;
+            }
+
+            main {
+                padding-top: 92px;
+            }
+
+            .view {
+                padding-top: 35px;
+            }
+
+            .orbitSystem,
+            .heroVisual {
+                min-height: 400px;
+            }
+
+            .orbitCore {
+                width: 90px;
+                height: 90px;
+            }
+
+            .orbitCore span {
+                font-size: 9px;
+            }
+
+            .orbitRing.ring1 {
+                width: 230px;
+                height: 230px;
+            }
+
+            .orbitRing.ring2 {
+                width: 320px;
+                height: 320px;
+            }
+
+            .orbitItem:nth-child(1) {
+                transform: rotate(0deg) translateX(115px);
+            }
+
+            .orbitItem:nth-child(2) {
+                transform: rotate(72deg) translateX(115px);
+            }
+
+            .orbitItem:nth-child(3) {
+                transform: rotate(144deg) translateX(115px);
+            }
+
+            .orbitItem:nth-child(4) {
+                transform: rotate(216deg) translateX(115px);
+            }
+
+            .orbitItem:nth-child(5) {
+                transform: rotate(288deg) translateX(115px);
+            }
+
+            .floatCard {
+                width: 118px;
+                padding: 10px 12px;
+            }
+
+            .floatCard .fcIcon {
+                width: 28px;
+                height: 28px;
+                font-size: 9px;
+                margin-bottom: 7px;
+            }
+
+            .floatCard strong {
+                font-size: 9.5px;
+            }
+
+            .floatCard small {
+                font-size: 8.5px;
+            }
+
+            .heroLogoBg {
+                max-width: 300px;
+                opacity: 0.16;
+            }
+
+            .footerIn {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loaderBox">
+            <div class="logoFrame loaderLogoFrame">
+                <img src="https://i.postimg.cc/L8R26Mq0/logo.jpg" alt="THE ONLY ONE COMPANY Logo">
+            </div>
+            <div class="loaderLine"></div>
+        </div>
+    </div>
+
+    <!-- APPLICATION -->
+    <div id="app">
+
+        <header class="nav">
+            <div class="logoFrame navLogoFrame">
+                <img src="https://i.postimg.cc/L8R26Mq0/logo.jpg" alt="THE ONLY ONE COMPANY Logo">
+            </div>
+
+            <button class="menu" id="menu" aria-label="Toggle Menu">☰</button>
+
+            <nav class="navLinks" id="navLinks">
+                <button data-view="home">Home</button>
+                <button data-view="services">Services</button>
+                <button data-view="projects">Projects</button>
+                <button data-view="about">About</button>
+                <button data-view="founder">Founder</button>
+                <button data-view="contact">Contact</button>
+            </nav>
+        </header>
+
+        <main>
+
+            <!-- HOME -->
+            <section class="view active" id="home">
+                <div class="container hero">
+                    <div>
+                        <div class="kicker">THE ONLY ONE COMPANY</div>
+                        <h1>Build the <span>future.</span></h1>
+                        <p class="lead">
+                            A premium technology company combining
+                            intelligent systems, engineering,
+                            connectivity, security and digital creativity.
+                        </p>
+                        <div class="actions">
+                            <button class="btn btnBlue" onclick="openView('services')">Explore Services</button>
+                            <button class="btn" onclick="openView('projects')">View Projects</button>
+                        </div>
+                    </div>
+
+                    <!-- ANIMATED ORBITING SERVICE SHOWCASE -->
+                    <div class="heroVisual">
+                        <div class="heroLogoGlow"></div>
+                        <img class="heroLogoBg" src="https://i.postimg.cc/L8R26Mq0/logo.jpg" alt="" aria-hidden="true">
+
+                        <div class="orbitSystem">
+                            <div class="orbitRing ring2"></div>
+                            <div class="orbitRing ring1"></div>
+
+                            <div class="orbitCore">
+                                <span>THE<br>ONLY<br>ONE</span>
+                            </div>
+
+                            <div class="orbitTrack">
+                                <div class="orbitItem">
+                                    <div class="floatCard">
+                                        <div class="fcIcon">AI</div>
+                                        <strong>AI &amp; INTELLIGENT</strong>
+                                        <small>Smart systems</small>
+                                    </div>
+                                </div>
+
+                                <div class="orbitItem">
+                                    <div class="floatCard">
+                                        <div class="fcIcon">FT</div>
+                                        <strong>FIBER &amp; NETWORK</strong>
+                                        <small>Fiber • LAN • Wi-Fi</small>
+                                    </div>
+                                </div>
+
+                                <div class="orbitItem">
+                                    <div class="floatCard">
+                                        <div class="fcIcon">BOT</div>
+                                        <strong>ROBOTICS</strong>
+                                        <small>Automation &amp; IoT</small>
+                                    </div>
+                                </div>
+
+                                <div class="orbitItem">
+                                    <div class="floatCard">
+                                        <div class="fcIcon">SEC</div>
+                                        <strong>CCTV &amp; SECURITY</strong>
+                                        <small>Monitoring systems</small>
+                                    </div>
+                                </div>
+
+                                <div class="orbitItem">
+                                    <div class="floatCard">
+                                        <div class="fcIcon">WEB</div>
+                                        <strong>WEB DEVELOPMENT</strong>
+                                        <small>Modern platforms</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICES -->
+            <section class="view" id="services">
+                <div class="container">
+                    <div class="kicker">CAPABILITIES</div>
+                    <h2 class="title">Our Services</h2>
+                    <p class="lead">
+                        The top navigation stays clean.
+                        Open any service below for its own detailed view.
+                    </p>
+
+                    <div class="grid">
+
+                        <!-- 1. AI - YOUR NEW IMAGE LINK -->
+                        <article class="card serviceCard" onclick="service(
+                            'AI & Intelligent Systems',
+                            'AI assistants, automation, intelligent dashboards and connected systems.',
+                            'https://i.postimg.cc/pLsWGXkX/AI.webp',
+                            ['AI assistants','Automation workflows','IoT dashboards']
+                        )">
+                            <div class="cardIcon">AI</div>
+                            <h3>AI & Intelligent Systems</h3>
+                            <p>Intelligent technology for modern environments.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 2. WEB -->
+                        <article class="card serviceCard" onclick="service(
+                            'Website Development',
+                            'Professional responsive websites, business platforms and web applications.',
+                            'https://images.pexels.com/photos/31177212/pexels-photo-31177212.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Business websites','Responsive interfaces','Web applications']
+                        )">
+                            <div class="cardIcon">WEB</div>
+                            <h3>Website Development</h3>
+                            <p>Modern websites and digital experiences.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 3. ROBOTICS -->
+                        <article class="card serviceCard" onclick="service(
+                            'Robotics & Automation',
+                            'Embedded systems, robotic prototypes, automation and IoT projects.',
+                            'https://ashtrix.in/wp-content/uploads/2026/01/Iot-and-home-automation-768x1024-jpg.webp',
+                            ['Robotic prototypes','Embedded systems','Automation']
+                        )">
+                            <div class="cardIcon">BOT</div>
+                            <h3>Robotics & Automation</h3>
+                            <p>Engineering ideas turned into working systems.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 4. ELECTRICAL -->
+                        <article class="card serviceCard" onclick="service(
+                            'Electrical Services',
+                            'Electrical installation and technology-integrated electrical solutions.',
+                            'https://images.pexels.com/photos/35154098/pexels-photo-35154098.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Electrical installation','Smart lighting','System integration']
+                        )">
+                            <div class="cardIcon">⚡</div>
+                            <h3>Electrical Services</h3>
+                            <p>Professional electrical technology solutions.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 5. FIBER & NETWORKING -->
+                        <article class="card serviceCard" onclick="service(
+                            'Fiber & Networking',
+                            'Fiber installation, splicing, LAN and reliable network infrastructure.',
+                            'https://images.pexels.com/photos/4373998/pexels-photo-4373998.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Fiber installation','LAN networking','Network maintenance']
+                        )">
+                            <div class="cardIcon">FT</div>
+                            <h3>Fiber & Networking</h3>
+                            <p>Connectivity infrastructure for homes and businesses.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 6. CCTV & SECURITY -->
+                        <article class="card serviceCard" onclick="service(
+                            'CCTV & Security',
+                            'Security camera installation, monitoring and connected security systems.',
+                            'https://images.pexels.com/photos/16746378/pexels-photo-16746378.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['CCTV installation','Remote monitoring','Security design']
+                        )">
+                            <div class="cardIcon">SEC</div>
+                            <h3>CCTV & Security</h3>
+                            <p>Modern protection and monitoring systems.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 7. WI-FI -->
+                        <article class="card serviceCard" onclick="service(
+                            'Wi-Fi Solutions',
+                            'Wireless network installation, coverage improvement and maintenance.',
+                            'https://images.pexels.com/photos/28348054/pexels-photo-28348054.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Wi-Fi installation','Coverage optimization','Maintenance']
+                        )">
+                            <div class="cardIcon">Wi</div>
+                            <h3>Wi-Fi Solutions</h3>
+                            <p>Reliable wireless connectivity.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 8. PHOTOGRAPHY -->
+                        <article class="card serviceCard" onclick="service(
+                            'Photography',
+                            'Professional photography and image editing for people and businesses.',
+                            'https://images.pexels.com/photos/4376301/pexels-photo-4376301.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Photography','Photo editing','Creative content']
+                        )">
+                            <div class="cardIcon">PH</div>
+                            <h3>Photography</h3>
+                            <p>Professional visual content.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                        <!-- 9. VIDEOGRAPHY -->
+                        <article class="card serviceCard" onclick="service(
+                            'Videography',
+                            'Video production, editing and digital media content.',
+                            'https://images.pexels.com/photos/8852719/pexels-photo-8852719.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                            ['Video production','Editing','Digital content']
+                        )">
+                            <div class="cardIcon">VI</div>
+                            <h3>Videography</h3>
+                            <p>Modern video and media production.</p>
+                            <span class="more">OPEN SERVICE →</span>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICE DETAIL -->
+            <section class="view" id="serviceDetail">
+                <div class="container">
+                    <button class="back" onclick="openView('services')">← BACK TO SERVICES</button>
+
+                    <div class="detail">
+                        <div class="detailImage">
+                            <img id="detailImg" alt="Service Detail">
+                        </div>
+
+                        <div class="detailText">
+                            <div class="kicker">THE ONLY ONE COMPANY</div>
+                            <h2 id="detailTitle"></h2>
+                            <p id="detailDesc"></p>
+                            <div class="bullets" id="detailBullets"></div>
+                            <div class="actions">
+                                <button class="btn btnBlue" onclick="openView('contact')">REQUEST THIS SERVICE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS -->
+            <section class="view" id="projects">
+                <div class="container">
+                    <div class="kicker">SELECTED WORK</div>
+                    <h2 class="title">Projects</h2>
+                    <p class="lead">
+                        Technology projects and concepts developed
+                        around practical engineering and intelligent systems.
+                    </p>
+
+                    <div class="grid">
+                        <!-- Project 1: Smart IoT Dashboard -->
+                        <article class="card">
+                            <div class="projectImage">
+                                <img src="https://i.postimg.cc/c4YtbY8R/iot.png" alt="Smart IoT Dashboard">
+                            </div>
+                            <h3>Smart IoT Dashboard</h3>
+                            <p>Connected device monitoring and control interface.</p>
+                        </article>
+
+                        <!-- Project 2: Robotics & Automation -->
+                        <article class="card">
+                            <div class="projectImage">
+                                <img src="https://ashtrix.in/wp-content/uploads/2026/01/Iot-and-home-automation-768x1024-jpg.webp"
+                                    alt="Robotics project components">
+                            </div>
+                            <h3>Robotics & Automation</h3>
+                            <p>Embedded systems and intelligent machine concepts.</p>
+                        </article>
+
+                        <!-- Project 3: Network Infrastructure -->
+                        <article class="card">
+                            <div class="projectImage">
+                                <img src="https://images.pexels.com/photos/4373998/pexels-photo-4373998.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                                    alt="Network infrastructure">
+                            </div>
+                            <h3>Network Infrastructure</h3>
+                            <p>Fiber, LAN and wireless connectivity projects.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT -->
+            <section class="view" id="about">
+                <div class="container">
+                    <div class="kicker">THE COMPANY</div>
+                    <h2 class="title">About Us</h2>
+
+                    <div class="split">
+                        <div class="card bigCard">
+                            <h3>Our Story</h3>
+                            <p>
+                                THE ONLY ONE COMPANY was created from
+                                a practical technology journey involving
+                                telecommunications, technical installations,
+                                fiber-related work, networking and digital systems.
+                                The company brings those skills together
+                                with modern innovation.
+                            </p>
+                        </div>
+
+                        <div class="card bigCard">
+                            <h3>Vision & Mission</h3>
+                            <p>
+                                <strong>Vision:</strong>
+                                build a respected technology company
+                                delivering intelligent and practical solutions.
+                                <br><br>
+                                <strong>Mission:</strong>
+                                combine engineering, digital development
+                                and innovation to solve real problems professionally.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOUNDER -->
+            <section class="view" id="founder">
+                <div class="container founder">
+                    <div class="founderPhoto">
+                        <img src="https://i.postimg.cc/y6M7tR7W/founder.jpg" alt="ELISHAMA MSAFIRI MKUMBWA">
+                    </div>
+
+                    <div class="founderText">
+                        <div class="kicker">FOUNDER</div>
+                        <h2>ELISHAMA MSAFIRI MKUMBWA</h2>
+                        <h3>Founder • Technology Innovator</h3>
+                        <p>
+                            Elishama Msafiri Mkumbwa is the founder
+                            of THE ONLY ONE COMPANY, with a technology
+                            background that includes telecommunications,
+                            installations, fiber-related work, networking
+                            and digital systems.
+                        </p>
+                        <p>
+                            The company was built around a vision of
+                            combining practical engineering with AI,
+                            robotics, websites, security, networking,
+                            electrical systems and creative technology.
+                        </p>
+                        <p>
+                            THE ONLY ONE COMPANY focuses on creating
+                            practical technology solutions for modern
+                            people, businesses and organizations.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section class="view" id="contact">
+                <div class="container">
+                    <div class="kicker">CONTACT</div>
+                    <h2 class="title">Start a Project</h2>
+                    <p class="lead">
+                        Write your message directly through the contact form.
+                    </p>
+
+                    <div class="contact">
+                        <div class="info">
+                            <h3>THE ONLY ONE COMPANY</h3>
+
+                            <div class="infoRow">
+                                <strong>Email</strong>
+                                <span>elishamamkumbwa@gmail.com</span>
+                            </div>
+
+                            <div class="infoRow">
+                                <strong>Phone</strong>
+                                <span>0686960040</span>
+                            </div>
+
+                            <div class="infoRow">
+                                <strong>Services</strong>
+                                <span>AI • Web • Robotics • Electrical • Fiber • CCTV • Wi-Fi • Media</span>
+                            </div>
+
+                            <div class="infoRow">
+                                <strong>Founder</strong>
+                                <span>ELISHAMA MSAFIRI MKUMBWA</span>
+                            </div>
+                        </div>
+
+                        <form class="form" id="contactForm">
+                            <div class="field">
+                                <label>YOUR NAME</label>
+                                <input id="cname" required>
+                            </div>
+
+                            <div class="field">
+                                <label>EMAIL</label>
+                                <input id="cemail" type="email" required>
+                            </div>
+
+                            <div class="field">
+                                <label>MESSAGE</label>
+                                <textarea id="cmsg" required placeholder="Tell us what you need..."></textarea>
+                            </div>
+
+                            <button type="submit" class="primary">SEND MESSAGE</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footerIn">
+                <span>© 2026 THE ONLY ONE COMPANY • Technology & Innovation</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        /* SHORT SELECTORS */
+        const $ = s => document.querySelector(s);
+        const $$ = s => document.querySelectorAll(s);
+
+        /* YOUR WHATSAPP NUMBER (with country code, no + or spaces) */
+        const WHATSAPP_NUMBER = "255686960040";
+
+        /* LOADER */
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                $("#loader").classList.add("hide");
+            }, 900);
+        });
+
+        /* PAGE NAVIGATION */
+        function openView(id) {
+            $$(".view").forEach(v => v.classList.remove("active"));
+            $("#" + id).classList.add("active");
+
+            $$(".navLinks button").forEach(b =>
+                b.classList.toggle("active", b.dataset.view === id)
+            );
+
+            $("#navLinks").classList.remove("show");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        $$(".navLinks button").forEach(b =>
+            b.onclick = () => openView(b.dataset.view)
+        );
+
+        /* MOBILE MENU */
+        $("#menu").onclick = () => $("#navLinks").classList.toggle("show");
+
+        /* SERVICE DETAILS */
+        function service(title, desc, img, bullets) {
+            $("#detailTitle").textContent = title;
+            $("#detailDesc").textContent = desc;
+            $("#detailImg").src = img;
+            $("#detailBullets").innerHTML = bullets.map(x => "<div>" + x + "</div>").join("");
+            openView("serviceDetail");
+        }
+
+        /* CONTACT FORM - SENDS TO WHATSAPP SILENTLY */
+        $("#contactForm").onsubmit = e => {
+            e.preventDefault();
+
+            const name = $("#cname").value;
+            const email = $("#cemail").value;
+            const message = $("#cmsg").value;
+
+            /* Build the message text */
+            const text =
+                `*THE ONLY ONE COMPANY - NEW MESSAGE*
+
+*Name:* ${name}
+*Email:* ${email}
+
+*Message:*
+${message}`;
+
+            /* Encode for URL */
+            const encodedText = encodeURIComponent(text);
+
+            /* Open WhatsApp silently */
+            window.open(
+                "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodedText,
+                "_blank"
+            );
+
+            e.target.reset();
+        };
+    </script>
+
+</body>
+
+</html>
