@@ -1710,6 +1710,23 @@ ${message}`;
         };
     </script>
 
+<script type="module">
+  import { createClient } from
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+  const SUPABASE_URL = 'https://lmqigzscbzknpahaxfwq.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_zBL0cmOKTykUtORhObMdgw_vDmdCudl';
+
+  const supabase = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  window.companySupabase = supabase;
+
+  console.log('THE ONLY ONE COMPANY: Supabase client initialized.');
+</script>
+
 </body>
 
 </html>
