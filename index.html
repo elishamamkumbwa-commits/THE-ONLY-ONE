@@ -1679,35 +1679,83 @@
             openView("serviceDetail");
         }
 
-        /* CONTACT FORM - SENDS TO WHATSAPP SILENTLY */
-        $("#contactForm").onsubmit = e => {
-            e.preventDefault();
+     
+<script type="module">
+import { createClient } from
+  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-            const name = $("#cname").value;
-            const email = $("#cemail").value;
-            const message = $("#cmsg").value;
+// Keep your existing Supabase project URL and publishable key here.
+const SUPABASE_URL = 'PASTE_YOUR_EXISTING_PROJECT_URL';
+const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_EXISTING_PUBLISHABLE_KEY';
 
-            /* Build the message text */
-            const text =
-                `*THE ONLY ONE COMPANY - NEW MESSAGE*
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-*Name:* ${name}
-*Email:* ${email}
+// Tanzania country code +255, without the plus sign.
+const WHATSAPP_NUMBER = '255686960040';
 
-*Message:*
-${message}`;
+const form = document.querySelector('#contactForm');
 
-            /* Encode for URL */
-            const encodedText = encodeURIComponent(text);
+if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-            /* Open WhatsApp silently */
-            window.open(
-                "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodedText,
-                "_blank"
-            );
+    const name = document.querySelector('#cname')?.value.trim();
+    const email = document.querySelector('#cemail')?.value.trim();
+    const message = document.querySelector('#cmsg')?.value.trim();
+    const button = form.querySelector('button[type="submit"]');
 
-            e.target.reset();
-        };
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'SENDING...';
+    }
+
+    try {
+      // Save the message to your Supabase database.
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([{ name, email, message }]);
+
+      if (error) throw error;
+
+      // Open WhatsApp with the message prepared.
+      const whatsappText =
+        `THE ONLY ONE COMPANY - NEW MESSAGE\n\n` +
+        `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+
+      const whatsappURL =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+        encodeURIComponent(whatsappText);
+
+      window.open(whatsappURL, '_blank');
+
+      alert('Message saved successfully! WhatsApp will open so you can send it.');
+      form.reset();
+
+    } catch (error) {
+      console.error('Contact form error:', error);
+      alert(
+        'The message could not be saved. Please check your Supabase table and security policies.'
+      );
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = 'SEND MESSAGE';
+      }
+    }
+  });
+}
+
+console.log('THE ONLY ONE COMPANY: Supabase contact form initialized.');
+</script>
+
     </script>
 
 <script type="module">
